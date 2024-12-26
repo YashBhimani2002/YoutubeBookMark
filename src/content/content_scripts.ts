@@ -1,13 +1,27 @@
-const handleDataScraping = () => {
-  const data: any = {};
+/**
+ * Scrapes YouTube video player data (current timestamp, video duration, and seek bar position) and sends it to the background script via chrome.runtime.sendMessage.
+ * The data is scraped from the YouTube video player's progress bar and seek bar elements.
+ * @returns {void}
+ */
+
+import { DataInterface } from "../helper/interfaceType";
+
+const handleDataScraping = (): void => {
+  const data: DataInterface = {
+    minValue: "",
+    maxValue: "",
+    value: "",
+    duration: "",
+    position: "",
+  };
   const timeTrackerElement = document.querySelector(
     '[class="ytp-progress-bar"]'
   );
   if (timeTrackerElement) {
-    data.minValue = timeTrackerElement.ariaValueMin;
-    data.maxValue = timeTrackerElement.ariaValueMax;
-    data.value = timeTrackerElement.ariaValueNow;
-    data.duration = timeTrackerElement.ariaValueText;
+    data.minValue = timeTrackerElement.ariaValueMin || "";
+    data.maxValue = timeTrackerElement.ariaValueMax || "";
+    data.value = timeTrackerElement.ariaValueNow || "";
+    data.duration = timeTrackerElement.ariaValueText || "";
   }
   const positionTrackerElement = document.querySelector(
     '[class^="ytp-play-progress ytp-swatch-background-color"]'
@@ -20,7 +34,7 @@ const handleDataScraping = () => {
       const matrixValue = parseFloat(
         transformValue.match(/matrix\(([^,]+)/)?.[1] ?? "0"
       );
-      data.position = transformValue;
+      data.position = transformValue || "";
     }
   }
 
