@@ -4,6 +4,7 @@
  * @returns {void}
  */
 
+import { youTubeIconLink } from "../helper/imageLink";
 import { DataInterface } from "../helper/interfaceType";
 
 const handleDataScraping = (): void => {
@@ -51,12 +52,12 @@ const handleDocumentMutations = () => {
 
   if (entity) {
     const image = document.createElement("img");
-    image.src = chrome.runtime.getURL(
-      "../assets/resource/youtubeBookMarkIcon.png"
-    );
+    image.src = youTubeIconLink;
     image.style.marginBottom = "15px";
     image.style.marginRight = "10px";
     image.style.cursor = "pointer";
+    image.style.width = "20px";
+    image.style.height = "20px";
     image.onclick = () => handleDataScraping();
     const firstChilde = entity.firstChild;
 
