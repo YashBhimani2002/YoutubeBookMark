@@ -5,6 +5,7 @@
  */
 
 import { youTubeIconLink } from "../helper/imageLink";
+import { handleBookMarkPointer, multipleInjectPointer } from "../helper/injectComponent";
 import { DataInterface } from "../helper/interfaceType";
 
 const handleDataScraping = (): void => {
@@ -28,19 +29,29 @@ const handleDataScraping = (): void => {
     '[class^="ytp-play-progress ytp-swatch-background-color"]'
   );
   if (positionTrackerElement) {
-    const computedStyles = window.getComputedStyle(positionTrackerElement);
-    // const transformValue: string = computedStyles.getPropertyValue("transform");
-
-    // if (transformValue && transformValue.startsWith("matrix")) {
-    //   const matrixValue = parseFloat(
-    //     transformValue.match(/matrix\(([^,]+)/)?.[1] ?? "0"
-    //   );
-      data.position =  "";
-    // }
+    let video: any = document.querySelector("video");
+    let currentTime = video.currentTime;
+    let progressBarContainer: any = document.querySelector(
+      ".ytp-progress-bar-container"
+    );
+    let progressBarWidth: any = progressBarContainer.offsetWidth;
+    let videoDuration: any = video.duration; // Get the video duration
+    let position = (currentTime / videoDuration) * progressBarWidth;
+    console.log(position, "position", currentTime, video, progressBarContainer);
+    handleBookMarkPointer(position);
+    data.position = position.toString() || "";
   }
 
   chrome.runtime.sendMessage({ type: "scrapeData", data: data });
 };
+/**
+ * Creates and places a yellow dot on the YouTube video progress bar at a specified position.
+ *
+ * @param {Object} progressBarContainer - The container element of the progress bar where the dot will be appended.
+ * @param {number | GLfloat | string} position - The position on the progress bar where the dot should be placed.
+ * The position can be a number, GLfloat, or string representing the pixel offset from the left.
+ */
+
 
 /**
  * Creates an image element with a YouTube bookmark icon and inserts it into the DOM right after the video controls.
@@ -69,4 +80,13 @@ const handleDocumentMutations = () => {
   }
 };
 
+export const handleStorePointerOnVideoLoad = () => {
+  chrome.storage.local.get("youtubeBookmarks", (result) => {
+    if (result.youtubeBookmarks) {
+     multipleInjectPointer(result.youtubeBookmarks);
+    }
+  });
+};
+
+handleStorePointerOnVideoLoad();
 handleDocumentMutations();

@@ -1,3 +1,4 @@
+import { handleBookMarkPointer } from "../helper/injectComponent";
 import {
   DataInterface,
   localStorageDataInterface,
@@ -5,7 +6,19 @@ import {
 
 chrome.runtime.onInstalled.addListener(() => {
   console.log("Extension installed");
-  // chrome.storage.local.clear();
+});
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === "getCurrentTabUrl") {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      if (tabs.length > 0) {
+        const tabUrl = tabs[0].url; // Get the URL of the current active tab
+        sendResponse({ url: tabUrl });
+      }
+    });
+    // Return true to indicate that the response will be sent asynchronously
+    return true;
+  }
 });
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -47,7 +60,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
           (_: any, index: number) => index !== message.number
         );
         localStoreData(updatedData);
-        sendResponse({message:"success"});
+        sendResponse({ message: "success" });
       }
     });
   }
