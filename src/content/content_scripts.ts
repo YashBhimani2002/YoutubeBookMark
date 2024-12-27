@@ -29,14 +29,14 @@ const handleDataScraping = (): void => {
   );
   if (positionTrackerElement) {
     const computedStyles = window.getComputedStyle(positionTrackerElement);
-    const transformValue: string = computedStyles.getPropertyValue("transform");
+    // const transformValue: string = computedStyles.getPropertyValue("transform");
 
-    if (transformValue && transformValue.startsWith("matrix")) {
-      const matrixValue = parseFloat(
-        transformValue.match(/matrix\(([^,]+)/)?.[1] ?? "0"
-      );
-      data.position = transformValue || "";
-    }
+    // if (transformValue && transformValue.startsWith("matrix")) {
+    //   const matrixValue = parseFloat(
+    //     transformValue.match(/matrix\(([^,]+)/)?.[1] ?? "0"
+    //   );
+      data.position =  "";
+    // }
   }
 
   chrome.runtime.sendMessage({ type: "scrapeData", data: data });

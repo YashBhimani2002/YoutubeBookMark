@@ -1,15 +1,11 @@
-import { DataInterface } from "../helper/interfaceType";
-interface localStorageDataInterface {
-  url: string;
-  duration: string;
-  position: string;
-  timeText: string;
-}
+import { DataInterface, localStorageDataInterface } from "../helper/interfaceType";
+
 
 chrome.runtime.onInstalled.addListener(() => {
   console.log("Extension installed");
-  //   chrome.storage.local.clear();
+    // chrome.storage.local.clear();
 });
+
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type == "scrapeData") {
@@ -41,6 +37,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         });
       }
     });
+  }else if(message.type == "playPause"){
+    chrome.tabs.update({ url: message.url });
   }
 });
 
@@ -73,3 +71,4 @@ const formateTime = (seconds: number) => {
     return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
   }
 };
+

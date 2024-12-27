@@ -5,3 +5,10 @@ export interface DataInterface {
     duration: string;
     position: string;
   }
+
+  export interface localStorageDataInterface {
+    url: string;
+    duration: string;
+    position: string;
+    timeText: string;
+  }
