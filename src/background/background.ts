@@ -8,6 +8,7 @@ chrome.runtime.onInstalled.addListener(() => {
   console.log("Extension installed");
 });
 
+// created for return current tab url
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "getCurrentTabUrl") {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -36,7 +37,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
           duration: data.duration,
           position: data.position,
           timeText: formateTime(Number(data.value)),
-          value:data.value
+          value: data.value,
         });
 
         chrome.storage.local.get("youtubeBookmarks", function (result) {
@@ -64,17 +65,26 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         sendResponse({ message: "success" });
       }
     });
-  }else if(message.type == "removePointer"){
+  } else if (message.type == "removePointer") {
     // chrome.runtime.sendMessage({ type: "removePointerContentScript" });
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       if (tabs) {
-        chrome.tabs.sendMessage(tabs[0].id || 0, { type: "removePointerContentScript" , data:message.updatedData});
+        chrome.tabs.sendMessage(tabs[0].id || 0, {
+          type: "removePointerContentScript",
+          data: message.updatedData,
+        });
       }
-    })
+    });
     sendResponse({ message: "success" });
   }
 });
 
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (changeInfo.url) {
+    // URL changed, send a message to the content script
+    chrome.tabs.sendMessage(tabId, { type: "urlChanged"});
+  }
+});
 /**
  * Stores the provided data in the local Chrome storage under the key "youtubeBookmarks".
  *

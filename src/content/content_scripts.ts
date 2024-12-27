@@ -100,5 +100,8 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
       multipleInjectPointer(message.data);
     }
     sendResponse({ message: "success" });
+  }else if(message.type=="urlChanged"){
+    await handleBookMarkPointerRemover();
+    handleStorePointerOnVideoLoad();
   }
 });
