@@ -1,11 +1,12 @@
-import { DataInterface, localStorageDataInterface } from "../helper/interfaceType";
-
+import {
+  DataInterface,
+  localStorageDataInterface,
+} from "../helper/interfaceType";
 
 chrome.runtime.onInstalled.addListener(() => {
   console.log("Extension installed");
-    // chrome.storage.local.clear();
+  // chrome.storage.local.clear();
 });
-
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type == "scrapeData") {
@@ -37,14 +38,24 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         });
       }
     });
-  }else if(message.type == "playPause"){
+  } else if (message.type == "playPause") {
     chrome.tabs.update({ url: message.url });
+  } else if (message.type == "delete") {
+    chrome.storage.local.get("youtubeBookmarks", function (result) {
+      if (result.youtubeBookmarks) {
+        const updatedData = result.youtubeBookmarks.filter(
+          (_: any, index: number) => index !== message.number
+        );
+        localStoreData(updatedData);
+        sendResponse({message:"success"});
+      }
+    });
   }
 });
 
 /**
  * Stores the provided data in the local Chrome storage under the key "youtubeBookmarks".
- * 
+ *
  * @param {localStorageDataInterface[]} data - An array of data objects to be stored in local storage.
  */
 
@@ -71,4 +82,3 @@ const formateTime = (seconds: number) => {
     return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
   }
 };
-

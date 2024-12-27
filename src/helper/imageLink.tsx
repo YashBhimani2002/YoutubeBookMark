@@ -3,3 +3,5 @@ export const youTubeIconLink = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAL
 export const playImageUrl ='../assets/resource/play.png';
 export const pauseImageUrl ='../assets/resource/pause.png';
 export const deleteImageUrl = '../assets/resource/delete.png';
+export const closeImageUrl = '../assets/resource/close.png';
+export const righterImageUrl = '../assets/resource/corecte.png';
