@@ -5,7 +5,11 @@
  */
 
 import { youTubeIconLink } from "../helper/imageLink";
-import { handleBookMarkPointer, multipleInjectPointer } from "../helper/injectComponent";
+import {
+  handleBookMarkPointer,
+  handleBookMarkPointerRemover,
+  multipleInjectPointer,
+} from "../helper/injectComponent";
 import { DataInterface } from "../helper/interfaceType";
 
 const handleDataScraping = (): void => {
@@ -37,7 +41,6 @@ const handleDataScraping = (): void => {
     let progressBarWidth: any = progressBarContainer.offsetWidth;
     let videoDuration: any = video.duration; // Get the video duration
     let position = (currentTime / videoDuration) * progressBarWidth;
-    console.log(position, "position", currentTime, video, progressBarContainer);
     handleBookMarkPointer(position);
     data.position = position.toString() || "";
   }
@@ -51,7 +54,6 @@ const handleDataScraping = (): void => {
  * @param {number | GLfloat | string} position - The position on the progress bar where the dot should be placed.
  * The position can be a number, GLfloat, or string representing the pixel offset from the left.
  */
-
 
 /**
  * Creates an image element with a YouTube bookmark icon and inserts it into the DOM right after the video controls.
@@ -83,10 +85,20 @@ const handleDocumentMutations = () => {
 export const handleStorePointerOnVideoLoad = () => {
   chrome.storage.local.get("youtubeBookmarks", (result) => {
     if (result.youtubeBookmarks) {
-     multipleInjectPointer(result.youtubeBookmarks);
+      multipleInjectPointer(result.youtubeBookmarks);
     }
   });
 };
 
 handleStorePointerOnVideoLoad();
 handleDocumentMutations();
+
+chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+  if (message.type == "removePointerContentScript") {
+    await handleBookMarkPointerRemover();
+    if (message.data.length > 0) {
+      multipleInjectPointer(message.data);
+    }
+    sendResponse({ message: "success" });
+  }
+});

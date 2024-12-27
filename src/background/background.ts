@@ -36,6 +36,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
           duration: data.duration,
           position: data.position,
           timeText: formateTime(Number(data.value)),
+          value:data.value
         });
 
         chrome.storage.local.get("youtubeBookmarks", function (result) {
@@ -63,6 +64,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         sendResponse({ message: "success" });
       }
     });
+  }else if(message.type == "removePointer"){
+    // chrome.runtime.sendMessage({ type: "removePointerContentScript" });
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      if (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id || 0, { type: "removePointerContentScript" , data:message.updatedData});
+      }
+    })
+    sendResponse({ message: "success" });
   }
 });
 

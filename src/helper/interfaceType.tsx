@@ -11,4 +11,5 @@ export interface DataInterface {
     duration: string;
     position: string;
     timeText: string;
+    value:string;
   }

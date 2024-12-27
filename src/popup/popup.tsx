@@ -38,11 +38,13 @@ const Popup = () => {
   };
   const handleDelete = (index: number) => {
     chrome.runtime.sendMessage({ type: "delete", number: index });
-    setBookmarks(bookmarks.filter((_, i) => i !== index));
+    const updatedData = bookmarks.filter((_, i) => i !== index);
+    setBookmarks(updatedData);
     setDeleteBookMarkNumber(-1);
+    chrome.runtime.sendMessage({ type: "removePointer",updatedData:updatedData });
   };
   return (
-    <div className="min-w-96 h-full w-full flex flex-col items-center p-1 gap-1">
+    <div className="min-w-96 h-2/3 w-full flex flex-col items-center p-1 gap-1">
       <div className="flex bg-gray-300 p-1 w-full rounded-sm gap-2">
         <img
           src="../assets/resource/youtubeBookMarkIcon.png"
@@ -52,7 +54,7 @@ const Popup = () => {
       </div>
       <div className="flex justify-center items-center h-full bg-slate-100 w-full p-1 rounded-sm border-[1px] border-gray-300">
         {bookmarks && bookmarks.length > 0 ? (
-          <div className="relative overflow-x-auto">
+          <div className="relative max-h-[239px] overflow-y-auto overflow-x-hidden">
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
@@ -70,7 +72,7 @@ const Popup = () => {
                   </th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="">
                 {bookmarks?.map(
                   (bookmark: localStorageDataInterface, index: number) => (
                     <React.Fragment key={index}>
