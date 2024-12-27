@@ -8,6 +8,18 @@ import {
   pauseImageUrl,
   playImageUrl,
 } from "../helper/imageLink";
+/**
+ * Popup component for managing YouTube bookmarks.
+ *
+ * This component retrieves and displays bookmarks stored in local Chrome storage,
+ * allowing users to play/pause videos at bookmarked timestamps and delete bookmarks.
+ * It uses Chrome's messaging API to communicate with background scripts for actions
+ * such as playing/pausing videos and removing bookmarks.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered Popup component.
+ */
+
 const Popup = () => {
   const [bookmarks, setBookmarks] = useState<localStorageDataInterface[]>([]);
   const [activeBookMarkNumber, setActiveBookMarkNumber] = useState(-1);
@@ -29,6 +41,14 @@ const Popup = () => {
     getLocalStorageData();
   }, []);
 
+  /**
+   * Handles play/pause of a YouTube video at a bookmarked timestamp.
+   *
+   * Given an index into the bookmarks array, this function sends a message to
+   * the background script to play/pause the video at the corresponding timestamp
+   * and updates the component's state to reflect the new active bookmark index.
+   * @param {number} index - The index into the bookmarks array to play/pause.
+   */
   const handlePlayPause = (index: number) => {
     setActiveBookMarkNumber(index);
     chrome.runtime.sendMessage({
@@ -36,6 +56,15 @@ const Popup = () => {
       url: bookmarks[index].url,
     });
   };
+  /**
+   * Handles deletion of a YouTube bookmark.
+   *
+   * Given an index into the bookmarks array, this function sends a message to
+   * the background script to delete the corresponding bookmark, updates the
+   * component's state to reflect the deletion, and sends a message to the
+   * background script to remove the corresponding bookmark pointer.
+   * @param {number} index - The index into the bookmarks array to delete.
+   */
   const handleDelete = (index: number) => {
     chrome.runtime.sendMessage({ type: "delete", number: index });
     const updatedData = bookmarks.filter((_, i) => i !== index);
@@ -45,6 +74,7 @@ const Popup = () => {
   };
   return (
     <div className="min-w-96 h-2/3 w-full flex flex-col items-center p-1 gap-1">
+      {/*Popup Header*/}
       <div className="flex bg-gray-300 p-1 w-full rounded-sm gap-2">
         <img
           src="../assets/resource/youtubeBookMarkIcon.png"
@@ -55,6 +85,7 @@ const Popup = () => {
       <div className="flex justify-center items-center h-full bg-slate-100 w-full p-1 rounded-sm border-[1px] border-gray-300">
         {bookmarks && bookmarks.length > 0 ? (
           <div className="relative max-h-[239px] overflow-y-auto overflow-x-hidden">
+            {/*Table UI : Created for show book mark list*/}
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>

@@ -12,6 +12,31 @@ import {
 } from "../helper/injectComponent";
 import { DataInterface } from "../helper/interfaceType";
 
+/**
+ * Scrapes the current YouTube video player data, including timestamp, video duration, 
+ * and seek bar position, and sends it to the background script.
+ * 
+ * The function retrieves the minimum, maximum, current timestamp, and duration values 
+ * from the YouTube video player's progress bar. It also calculates the position of the 
+ * video on the seek bar and uses it to place a bookmark pointer on the progress bar.
+ * 
+ * The scraped data is then sent to the background script using `chrome.runtime.sendMessage`.
+ * 
+ * @returns {void}
+ */
+
+/**
+ * Scrapes the current YouTube video player data, including timestamp, video duration, 
+ * and seek bar position, and sends it to the background script.
+ * 
+ * The function retrieves the minimum, maximum, current timestamp, and duration values 
+ * from the YouTube video player's progress bar. It also calculates the position of the 
+ * video on the seek bar and uses it to place a bookmark pointer on the progress bar.
+ * 
+ * The scraped data is then sent to the background script using `chrome.runtime.sendMessage`.
+ * 
+ * @returns {void}
+ */
 const handleDataScraping = (): void => {
   const data: DataInterface = {
     minValue: "",
@@ -47,13 +72,6 @@ const handleDataScraping = (): void => {
 
   chrome.runtime.sendMessage({ type: "scrapeData", data: data });
 };
-/**
- * Creates and places a yellow dot on the YouTube video progress bar at a specified position.
- *
- * @param {Object} progressBarContainer - The container element of the progress bar where the dot will be appended.
- * @param {number | GLfloat | string} position - The position on the progress bar where the dot should be placed.
- * The position can be a number, GLfloat, or string representing the pixel offset from the left.
- */
 
 /**
  * Creates an image element with a YouTube bookmark icon and inserts it into the DOM right after the video controls.
@@ -82,6 +100,13 @@ const handleDocumentMutations = () => {
   }
 };
 
+/**
+ * Retrieves the youtubeBookmarks array from local Chrome storage and
+ * injects bookmarks into the YouTube video player's progress bar.
+ * If the data is not present in local storage, no action is taken.
+ * This function is called when the popup is opened or when the user
+ * navigates to a new YouTube video.
+ */
 export const handleStorePointerOnVideoLoad = () => {
   chrome.storage.local.get("youtubeBookmarks", (result) => {
     if (result.youtubeBookmarks) {
@@ -93,6 +118,7 @@ export const handleStorePointerOnVideoLoad = () => {
 handleStorePointerOnVideoLoad();
 handleDocumentMutations();
 
+//created for listen updated book mark pointer
 chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
   if (message.type == "removePointerContentScript") {
     await handleBookMarkPointerRemover();

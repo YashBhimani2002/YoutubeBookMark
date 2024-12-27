@@ -22,6 +22,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
+//created for listen message
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type == "scrapeData") {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -79,6 +80,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
+//created for listen url change
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.url) {
     // URL changed, send a message to the content script
@@ -91,6 +93,11 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
  * @param {localStorageDataInterface[]} data - An array of data objects to be stored in local storage.
  */
 
+/**
+ * Stores the provided data in the local Chrome storage under the key "youtubeBookmarks".
+ *
+ * @param {localStorageDataInterface[]} data - An array of data objects to be stored in local storage.
+ */
 const localStoreData = (data: localStorageDataInterface[]) => {
   chrome.storage.local.set({ youtubeBookmarks: data });
 };
