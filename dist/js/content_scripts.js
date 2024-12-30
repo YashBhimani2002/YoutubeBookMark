@@ -28432,10 +28432,10 @@ module.exports = styleTagTransform;
 
 /***/ }),
 
-/***/ "./src/app/features/DeleteData.tsx":
-/*!*****************************************!*\
-  !*** ./src/app/features/DeleteData.tsx ***!
-  \*****************************************/
+/***/ "./src/app/redux/features/DeleteData.tsx":
+/*!***********************************************!*\
+  !*** ./src/app/redux/features/DeleteData.tsx ***!
+  \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -28467,10 +28467,10 @@ const { storeData } = bookmarkSlice.actions;
 
 /***/ }),
 
-/***/ "./src/app/store.ts":
-/*!**************************!*\
-  !*** ./src/app/store.ts ***!
-  \**************************/
+/***/ "./src/app/redux/store.ts":
+/*!********************************!*\
+  !*** ./src/app/redux/store.ts ***!
+  \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -28478,7 +28478,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   store: () => (/* binding */ store)
 /* harmony export */ });
 /* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.modern.mjs");
-/* harmony import */ var _features_DeleteData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./features/DeleteData */ "./src/app/features/DeleteData.tsx");
+/* harmony import */ var _features_DeleteData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./features/DeleteData */ "./src/app/redux/features/DeleteData.tsx");
 
 
 const store = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__.configureStore)({
@@ -28652,7 +28652,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
 /* harmony import */ var _components_removeConformation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/removeConformation */ "./src/components/removeConformation.tsx");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/dist/react-redux.mjs");
-/* harmony import */ var _app_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../app/store */ "./src/app/store.ts");
+/* harmony import */ var _app_redux_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../app/redux/store */ "./src/app/redux/store.ts");
 /* harmony import */ var _contentStyle__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./contentStyle */ "./src/helper/contentStyle.tsx");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -28749,7 +28749,7 @@ const handlePopup = () => {
     Object.assign(renderWrapper.style, _contentStyle__WEBPACK_IMPORTED_MODULE_4__.bookMarkRemovePopupContainer);
     renderWrapper.className = "yt-bookmark";
     const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(renderWrapper);
-    root.render(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_redux__WEBPACK_IMPORTED_MODULE_5__.Provider, { store: _app_store__WEBPACK_IMPORTED_MODULE_3__.store },
+    root.render(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_redux__WEBPACK_IMPORTED_MODULE_5__.Provider, { store: _app_redux_store__WEBPACK_IMPORTED_MODULE_3__.store },
         react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_removeConformation__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
     document.body.appendChild(renderWrapper);
 };
@@ -34768,8 +34768,8 @@ var __webpack_exports__ = {};
   !*** ./src/content/content_scripts.ts ***!
   \****************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _app_features_DeleteData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app/features/DeleteData */ "./src/app/features/DeleteData.tsx");
-/* harmony import */ var _app_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../app/store */ "./src/app/store.ts");
+/* harmony import */ var _app_redux_features_DeleteData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app/redux/features/DeleteData */ "./src/app/redux/features/DeleteData.tsx");
+/* harmony import */ var _app_redux_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../app/redux/store */ "./src/app/redux/store.ts");
 /* harmony import */ var _helper_contentStyle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../helper/contentStyle */ "./src/helper/contentStyle.tsx");
 /* harmony import */ var _helper_imageLink__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../helper/imageLink */ "./src/helper/imageLink.tsx");
 /* harmony import */ var _helper_injectComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../helper/injectComponent */ "./src/helper/injectComponent.tsx");
@@ -34795,11 +34795,11 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 //created for listen updated book mark pointer
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => __awaiter(void 0, void 0, void 0, function* () {
     if (message.type == "removerConformationPopupActive") {
-        _app_store__WEBPACK_IMPORTED_MODULE_1__.store.dispatch((0,_app_features_DeleteData__WEBPACK_IMPORTED_MODULE_0__.storeData)(message.data));
+        _app_redux_store__WEBPACK_IMPORTED_MODULE_1__.store.dispatch((0,_app_redux_features_DeleteData__WEBPACK_IMPORTED_MODULE_0__.storeData)(message.data));
         (0,_helper_injectComponent__WEBPACK_IMPORTED_MODULE_4__.handleTogglePopup)("flex");
     }
     else if (message.type == "removePointerContentScriptDisable") {
-        _app_store__WEBPACK_IMPORTED_MODULE_1__.store.dispatch((0,_app_features_DeleteData__WEBPACK_IMPORTED_MODULE_0__.storeData)({
+        _app_redux_store__WEBPACK_IMPORTED_MODULE_1__.store.dispatch((0,_app_redux_features_DeleteData__WEBPACK_IMPORTED_MODULE_0__.storeData)({
             positionIndex: -1,
             bookMarkData: [],
         }));

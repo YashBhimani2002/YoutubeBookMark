@@ -3,8 +3,8 @@
  * The data is scraped from the YouTube video player's progress bar and seek bar elements.
  * @returns {void}
  */
-import { storeData } from "../app/features/DeleteData";
-import { store } from "../app/store";
+import { storeData } from "../app/redux/features/DeleteData";
+import { store } from "../app/redux/store";
 import { bookMarkImageLogoStyle } from "../helper/contentStyle";
 import { youTubeIconLink } from "../helper/imageLink";
 import {

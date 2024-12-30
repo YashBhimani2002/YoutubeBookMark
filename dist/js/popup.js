@@ -28432,10 +28432,10 @@ module.exports = styleTagTransform;
 
 /***/ }),
 
-/***/ "./src/app/features/DeleteData.tsx":
-/*!*****************************************!*\
-  !*** ./src/app/features/DeleteData.tsx ***!
-  \*****************************************/
+/***/ "./src/app/redux/features/DeleteData.tsx":
+/*!***********************************************!*\
+  !*** ./src/app/redux/features/DeleteData.tsx ***!
+  \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -28467,10 +28467,10 @@ const { storeData } = bookmarkSlice.actions;
 
 /***/ }),
 
-/***/ "./src/app/store.ts":
-/*!**************************!*\
-  !*** ./src/app/store.ts ***!
-  \**************************/
+/***/ "./src/app/redux/store.ts":
+/*!********************************!*\
+  !*** ./src/app/redux/store.ts ***!
+  \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -28478,7 +28478,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   store: () => (/* binding */ store)
 /* harmony export */ });
 /* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.modern.mjs");
-/* harmony import */ var _features_DeleteData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./features/DeleteData */ "./src/app/features/DeleteData.tsx");
+/* harmony import */ var _features_DeleteData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./features/DeleteData */ "./src/app/redux/features/DeleteData.tsx");
 
 
 const store = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__.configureStore)({
@@ -34624,7 +34624,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
 /* harmony import */ var _popup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./popup */ "./src/popup/popup.tsx");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/dist/react-redux.mjs");
-/* harmony import */ var _app_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../app/store */ "./src/app/store.ts");
+/* harmony import */ var _app_redux_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../app/redux/store */ "./src/app/redux/store.ts");
 
 
 
@@ -34636,7 +34636,7 @@ if (!appElement) {
     throw new Error("appElement not found");
 }
 const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(appElement);
-root.render(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_redux__WEBPACK_IMPORTED_MODULE_4__.Provider, { store: _app_store__WEBPACK_IMPORTED_MODULE_3__.store },
+root.render(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_redux__WEBPACK_IMPORTED_MODULE_4__.Provider, { store: _app_redux_store__WEBPACK_IMPORTED_MODULE_3__.store },
     react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_popup__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
 
 })();

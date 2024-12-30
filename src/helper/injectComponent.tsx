@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { localStorageDataInterface } from "./interfaceType";
 import RemoveConformation from "../components/removeConformation";
 import { Provider } from "react-redux";
-import { store } from "../app/store";
+import { store } from "../app/redux/store";
 import { bookMarkDot, bookMarkRemovePopupContainer } from "./contentStyle";
 // import RemoveConformation from "../components/removeConformation";
 

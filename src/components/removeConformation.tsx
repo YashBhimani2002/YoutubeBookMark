@@ -1,7 +1,7 @@
 import React, { use } from "react";
 import "../static/main.css";
 import { useSelector } from "react-redux";
-import { RootState } from "../app/store";
+import { RootState } from "../app/redux/store";
 /**
  * React component for a modal dialog that asks the user to confirm the deletion of a bookmark.
  * The component renders a modal dialog with a prompt message and two buttons: "No, cancel" and
