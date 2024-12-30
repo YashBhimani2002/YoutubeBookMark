@@ -1,8 +1,15 @@
 {
+  "name": "YoutubeBookmarker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "watch": "webpack --watch --progress --config webpack.dev.js"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
     "@types/chrome": "^0.0.287",
     "@types/react": "^19.0.2",
@@ -21,8 +28,10 @@
     "webpack-merge": "^6.0.1"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.5.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-redux": "^9.2.0",
     "typescript": "^5.7.2"
   }
 }

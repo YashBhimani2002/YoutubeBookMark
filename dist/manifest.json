@@ -29,7 +29,8 @@
             ],
             "js": [
                 "js/content_scripts.js"
-            ]
+            ],
+            "css": ["main.css"]
         }
     ],
     "host_permissions": [

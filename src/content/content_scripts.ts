@@ -3,38 +3,40 @@
  * The data is scraped from the YouTube video player's progress bar and seek bar elements.
  * @returns {void}
  */
-
+import { storeData } from "../app/features/DeleteData";
+import { store } from "../app/store";
 import { youTubeIconLink } from "../helper/imageLink";
 import {
   handleBookMarkPointer,
   handleBookMarkPointerRemover,
+  handlePopup,
+  handleTogglePopup,
   multipleInjectPointer,
 } from "../helper/injectComponent";
 import { DataInterface } from "../helper/interfaceType";
-
 /**
- * Scrapes the current YouTube video player data, including timestamp, video duration, 
+ * Scrapes the current YouTube video player data, including timestamp, video duration,
  * and seek bar position, and sends it to the background script.
- * 
- * The function retrieves the minimum, maximum, current timestamp, and duration values 
- * from the YouTube video player's progress bar. It also calculates the position of the 
+ *
+ * The function retrieves the minimum, maximum, current timestamp, and duration values
+ * from the YouTube video player's progress bar. It also calculates the position of the
  * video on the seek bar and uses it to place a bookmark pointer on the progress bar.
- * 
+ *
  * The scraped data is then sent to the background script using `chrome.runtime.sendMessage`.
- * 
+ *
  * @returns {void}
  */
 
 /**
- * Scrapes the current YouTube video player data, including timestamp, video duration, 
+ * Scrapes the current YouTube video player data, including timestamp, video duration,
  * and seek bar position, and sends it to the background script.
- * 
- * The function retrieves the minimum, maximum, current timestamp, and duration values 
- * from the YouTube video player's progress bar. It also calculates the position of the 
+ *
+ * The function retrieves the minimum, maximum, current timestamp, and duration values
+ * from the YouTube video player's progress bar. It also calculates the position of the
  * video on the seek bar and uses it to place a bookmark pointer on the progress bar.
- * 
+ *
  * The scraped data is then sent to the background script using `chrome.runtime.sendMessage`.
- * 
+ *
  * @returns {void}
  */
 const handleDataScraping = (): void => {
@@ -79,8 +81,8 @@ const handleDataScraping = (): void => {
  * If no such element is found, the element is appended to the end of the parent element.
  */
 const handleDocumentMutations = () => {
+  handlePopup();
   const entity = document.querySelector('[class^="ytp-right-controls"]');
-
   if (entity) {
     const image = document.createElement("img");
     image.src = youTubeIconLink;
@@ -120,13 +122,24 @@ handleDocumentMutations();
 
 //created for listen updated book mark pointer
 chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
-  if (message.type == "removePointerContentScript") {
+  if (message.type == "removerConformationPopupActive") {
+    store.dispatch(storeData(message.data));
+    handleTogglePopup("flex");
+  } else if (message.type == "removePointerContentScriptDisable") {
+    store.dispatch(
+      storeData({
+        positionIndex: -1,
+        bookMarkData: [],
+      })
+    );
+    handleTogglePopup("none");
+  } else if (message.type == "removePointerContentScript") {
     await handleBookMarkPointerRemover();
     if (message.data.length > 0) {
       multipleInjectPointer(message.data);
     }
     sendResponse({ message: "success" });
-  }else if(message.type=="urlChanged"){
+  } else if (message.type == "urlChanged") {
     await handleBookMarkPointerRemover();
     handleStorePointerOnVideoLoad();
   }

@@ -1,4 +1,10 @@
+import React from "react";
+import { createRoot } from "react-dom/client";
 import { localStorageDataInterface } from "./interfaceType";
+import RemoveConformation from "../components/removeConformation";
+import { Provider } from "react-redux";
+import { store } from "../app/store";
+// import RemoveConformation from "../components/removeConformation";
 
 /**
  * Injects a single bookmark pointer into the YouTube video player's progress bar.
@@ -70,13 +76,51 @@ export const multipleInjectPointer = (data: localStorageDataInterface[]) => {
  * on the progress bar. The operation is performed asynchronously.
  */
 export const handleBookMarkPointerRemover = async () => {
-    // Select all elements with the class 'youtube-bookmark-dot'
-    const bookmarkDots = document.querySelectorAll(".youtube-bookmark-dot");
-    // Iterate over the NodeList and remove each element
-    new Promise((resolve)=>{
-        bookmarkDots.forEach(dot => {
-            dot.remove();
-          });
-    })
-  };
-  
+  // Select all elements with the class 'youtube-bookmark-dot'
+  const bookmarkDots = document.querySelectorAll(".youtube-bookmark-dot");
+  // Iterate over the NodeList and remove each element
+  new Promise((resolve) => {
+    bookmarkDots.forEach((dot) => {
+      dot.remove();
+    });
+  });
+};
+
+export const handlePopup = () => {
+  const renderWrapper = document.createElement("div");
+  renderWrapper.setAttribute(
+    "style",
+    `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999999;
+      font-size: 24px;
+      pointer-events: all;
+      `
+  );
+  renderWrapper.className = "yt-bookmark";
+  const root = createRoot(renderWrapper);
+  root.render(
+    <Provider store={store}>
+      <RemoveConformation />
+    </Provider>
+  );
+  document.body.appendChild(renderWrapper);
+};
+
+export const handleTogglePopup = (value: string) => {
+  const element = document.querySelector('[class^="yt-bookmark"]');
+  // Check if element is found and cast to HTMLElement
+  if (element && element instanceof HTMLElement) {
+    // Change the display style to 'flex'
+    element.style.display = value;
+  }
+};

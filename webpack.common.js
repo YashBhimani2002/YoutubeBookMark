@@ -22,9 +22,9 @@ module.exports={
                     loader: 'postcss-loader',
                     options: {
                         postcssOptions: {
+                            ident: "postcss",
                             plugins: [
-                                tailwindcss,
-                                autoprefixer
+                                tailwindcss, autoprefixer
                             ]
                         }
                     }
@@ -49,15 +49,10 @@ module.exports={
                 }
             ]
         }),
-        ...getHtmlPlugin(['popup','background'])
+        ...getHtmlPlugin(['popup'])
     ],
     resolve:{
         extensions:[".tsx",".ts",".js"],
-    },
-    optimization:{
-        splitChunks: {
-            chunks: "all",
-        },
     },
     output:{
         filename:"[name].js",

@@ -77,6 +77,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       }
     });
     sendResponse({ message: "success" });
+  } else if (message.type == "activeRemoverConformationPopup") {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      if (tabs.length > 0) {
+        chrome.tabs.sendMessage(tabs[0].id || 0, {
+          type: "removePointerContentScriptDisable",
+        });
+      }
+    })
   }
 });
 

@@ -8,6 +8,8 @@ import {
   pauseImageUrl,
   playImageUrl,
 } from "../helper/imageLink";
+import { useDispatch } from "react-redux";
+import { storeData } from "../app/features/DeleteData";
 /**
  * Popup component for managing YouTube bookmarks.
  *
@@ -24,6 +26,7 @@ const Popup = () => {
   const [bookmarks, setBookmarks] = useState<localStorageDataInterface[]>([]);
   const [activeBookMarkNumber, setActiveBookMarkNumber] = useState(-1);
   const [deleteBookMarkNumber, setDeleteBookMarkNumber] = useState(-1);
+  const dispatch = useDispatch()
   /**
    * Retrieves the youtubeBookmarks array from local Chrome storage and
    * updates the component's state with the retrieved data.
@@ -69,8 +72,22 @@ const Popup = () => {
     chrome.runtime.sendMessage({ type: "delete", number: index });
     const updatedData = bookmarks.filter((_, i) => i !== index);
     setBookmarks(updatedData);
-    setDeleteBookMarkNumber(-1);
-    chrome.runtime.sendMessage({ type: "removePointer",updatedData:updatedData });
+    chrome.runtime.sendMessage({
+      type: "removePointer",
+      updatedData: updatedData,
+    });
+  };
+  const handleConformationPopup = (index: number) => {
+    setDeleteBookMarkNumber(index);
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      if (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id || 0, {
+          type: "removerConformationPopupActive",
+          data:{positionIndex:index,bookMarkData:bookmarks}
+        });
+      }
+    });
+    window.close(); 
   };
   return (
     <div className="min-w-96 h-2/3 w-full flex flex-col items-center p-1 gap-1">
@@ -134,11 +151,13 @@ const Popup = () => {
                           <img
                             src={deleteImageUrl}
                             className="w-5 h-5 cursor-pointer"
-                            onClick={() => setDeleteBookMarkNumber(index)}
+                            onClick={() => {
+                              handleConformationPopup(index);
+                            }}
                           />
                         </td>
                       </tr>
-                      {deleteBookMarkNumber === index && (
+                      {/* {deleteBookMarkNumber === index && (
                         <tr className="bg-gray-300">
                           <td colSpan={3} className="text-black p-2">
                             Are you sure you want to delete this item?
@@ -156,7 +175,7 @@ const Popup = () => {
                             />
                           </td>
                         </tr>
-                      )}
+                      )} */}
                     </React.Fragment>
                   )
                 )}
