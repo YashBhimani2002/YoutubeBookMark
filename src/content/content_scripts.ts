@@ -107,16 +107,28 @@ const handleStorePointerOnVideoLoad = () => {
  * If no such element is found, the element is appended to the end of the parent element.
  */
 const main = () => {
-  const addElement = document.querySelector('[class^="video-ads"]');
-  
+  console.log("main call successfully");
+
+  const addElement = document.querySelector('[class^="video-ads"]') || {
+    childNodes: [],
+  };
+  console.log(addElement, "form main function");
+
+  handleStorePointerOnVideoLoad();
   if (addElement && addElement?.childNodes?.length > 0) {
+    // let bookMarkLogo = document.querySelector('[class^="YT-bookmark-logo"]');
+    // if (bookMarkLogo && bookMarkLogo!=undefined) {
+    //   bookMarkLogo.remove();
+    // }
     return 0;
   } else {
-    handleStorePointerOnVideoLoad();
+    console.log("without add call successfully");
+
     handlePopup();
     const entity = document.querySelector('[class^="ytp-right-controls"]');
     if (entity) {
       const image = document.createElement("img");
+      image.className = "YT-bookmark-logo";
       image.src = youTubeIconLink;
       Object.assign(image.style, bookMarkImageLogoStyle);
       image.onclick = () => handleDataScraping();
@@ -132,8 +144,8 @@ const main = () => {
 };
 const addElement = document.querySelector('[class^="video-ads"]');
 if (addElement) {
-    new MutationObserver(main).observe(addElement, { childList: true });
-} else {
-  main();
+  const mutationObserver = new MutationObserver(main);
+  mutationObserver.observe(addElement, { childList: true, subtree: true });
+  mutationObserver.disconnect();
 }
-
+main();

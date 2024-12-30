@@ -34878,16 +34878,26 @@ const handleStorePointerOnVideoLoad = () => {
  */
 const main = () => {
     var _a;
-    const addElement = document.querySelector('[class^="video-ads"]');
+    console.log("main call successfully");
+    const addElement = document.querySelector('[class^="video-ads"]') || {
+        childNodes: [],
+    };
+    console.log(addElement, "form main function");
+    handleStorePointerOnVideoLoad();
     if (addElement && ((_a = addElement === null || addElement === void 0 ? void 0 : addElement.childNodes) === null || _a === void 0 ? void 0 : _a.length) > 0) {
+        // let bookMarkLogo = document.querySelector('[class^="YT-bookmark-logo"]');
+        // if (bookMarkLogo && bookMarkLogo!=undefined) {
+        //   bookMarkLogo.remove();
+        // }
         return 0;
     }
     else {
-        handleStorePointerOnVideoLoad();
+        console.log("without add call successfully");
         (0,_helper_injectComponent__WEBPACK_IMPORTED_MODULE_4__.handlePopup)();
         const entity = document.querySelector('[class^="ytp-right-controls"]');
         if (entity) {
             const image = document.createElement("img");
+            image.className = "YT-bookmark-logo";
             image.src = _helper_imageLink__WEBPACK_IMPORTED_MODULE_3__.youTubeIconLink;
             Object.assign(image.style, _helper_contentStyle__WEBPACK_IMPORTED_MODULE_2__.bookMarkImageLogoStyle);
             image.onclick = () => handleDataScraping();
@@ -34903,11 +34913,11 @@ const main = () => {
 };
 const addElement = document.querySelector('[class^="video-ads"]');
 if (addElement) {
-    new MutationObserver(main).observe(addElement, { childList: true });
+    const mutationObserver = new MutationObserver(main);
+    mutationObserver.observe(addElement, { childList: true, subtree: true });
+    mutationObserver.disconnect();
 }
-else {
-    main();
-}
+main();
 
 })();
 
