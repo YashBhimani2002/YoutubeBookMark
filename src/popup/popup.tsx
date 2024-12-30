@@ -2,14 +2,11 @@ import React, { useEffect, useState } from "react";
 import "../static/main.css";
 import { localStorageDataInterface } from "../helper/interfaceType";
 import {
-  closeImageUrl,
-  righterImageUrl,
   deleteImageUrl,
   pauseImageUrl,
   playImageUrl,
 } from "../helper/imageLink";
-import { useDispatch } from "react-redux";
-import { storeData } from "../app/features/DeleteData";
+
 /**
  * Popup component for managing YouTube bookmarks.
  *
@@ -25,8 +22,6 @@ import { storeData } from "../app/features/DeleteData";
 const Popup = () => {
   const [bookmarks, setBookmarks] = useState<localStorageDataInterface[]>([]);
   const [activeBookMarkNumber, setActiveBookMarkNumber] = useState(-1);
-  const [deleteBookMarkNumber, setDeleteBookMarkNumber] = useState(-1);
-  const dispatch = useDispatch()
   /**
    * Retrieves the youtubeBookmarks array from local Chrome storage and
    * updates the component's state with the retrieved data.
@@ -59,35 +54,25 @@ const Popup = () => {
       url: bookmarks[index].url,
     });
   };
+
   /**
-   * Handles deletion of a YouTube bookmark.
+   * Handles the confirmation popup for removing a bookmark.
    *
-   * Given an index into the bookmarks array, this function sends a message to
-   * the background script to delete the corresponding bookmark, updates the
-   * component's state to reflect the deletion, and sends a message to the
-   * background script to remove the corresponding bookmark pointer.
-   * @param {number} index - The index into the bookmarks array to delete.
+   * Sends a message to the content script to activate the confirmation popup
+   * and passes the index of the bookmark to be removed and the bookmarks array
+   * to the content script. Then closes the popup.
+   * @param {number} index - The index into the bookmarks array of the bookmark to be removed.
    */
-  const handleDelete = (index: number) => {
-    chrome.runtime.sendMessage({ type: "delete", number: index });
-    const updatedData = bookmarks.filter((_, i) => i !== index);
-    setBookmarks(updatedData);
-    chrome.runtime.sendMessage({
-      type: "removePointer",
-      updatedData: updatedData,
-    });
-  };
   const handleConformationPopup = (index: number) => {
-    setDeleteBookMarkNumber(index);
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       if (tabs) {
         chrome.tabs.sendMessage(tabs[0].id || 0, {
           type: "removerConformationPopupActive",
-          data:{positionIndex:index,bookMarkData:bookmarks}
+          data: { positionIndex: index, bookMarkData: bookmarks },
         });
       }
     });
-    window.close(); 
+    window.close();
   };
   return (
     <div className="min-w-96 h-2/3 w-full flex flex-col items-center p-1 gap-1">
@@ -157,25 +142,6 @@ const Popup = () => {
                           />
                         </td>
                       </tr>
-                      {/* {deleteBookMarkNumber === index && (
-                        <tr className="bg-gray-300">
-                          <td colSpan={3} className="text-black p-2">
-                            Are you sure you want to delete this item?
-                          </td>
-                          <td className="flex gap-2 justify-center items-center h-full p-2">
-                            <img
-                              src={closeImageUrl}
-                              className="w-5 h-5 cursor-pointer rounded-md"
-                              onClick={() => setDeleteBookMarkNumber(-1)}
-                            />
-                            <img
-                              src={righterImageUrl}
-                              className="w-5 h-5 cursor-pointer rounded-md"
-                              onClick={() => handleDelete(index)}
-                            />
-                          </td>
-                        </tr>
-                      )} */}
                     </React.Fragment>
                   )
                 )}

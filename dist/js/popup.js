@@ -28526,8 +28526,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _static_main_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../static/main.css */ "./src/static/main.css");
 /* harmony import */ var _helper_imageLink__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../helper/imageLink */ "./src/helper/imageLink.tsx");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/dist/react-redux.mjs");
-
 
 
 
@@ -28545,8 +28543,6 @@ __webpack_require__.r(__webpack_exports__);
 const Popup = () => {
     const [bookmarks, setBookmarks] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
     const [activeBookMarkNumber, setActiveBookMarkNumber] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(-1);
-    const [deleteBookMarkNumber, setDeleteBookMarkNumber] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(-1);
-    const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useDispatch)();
     /**
      * Retrieves the youtubeBookmarks array from local Chrome storage and
      * updates the component's state with the retrieved data.
@@ -28579,30 +28575,19 @@ const Popup = () => {
         });
     };
     /**
-     * Handles deletion of a YouTube bookmark.
+     * Handles the confirmation popup for removing a bookmark.
      *
-     * Given an index into the bookmarks array, this function sends a message to
-     * the background script to delete the corresponding bookmark, updates the
-     * component's state to reflect the deletion, and sends a message to the
-     * background script to remove the corresponding bookmark pointer.
-     * @param {number} index - The index into the bookmarks array to delete.
+     * Sends a message to the content script to activate the confirmation popup
+     * and passes the index of the bookmark to be removed and the bookmarks array
+     * to the content script. Then closes the popup.
+     * @param {number} index - The index into the bookmarks array of the bookmark to be removed.
      */
-    const handleDelete = (index) => {
-        chrome.runtime.sendMessage({ type: "delete", number: index });
-        const updatedData = bookmarks.filter((_, i) => i !== index);
-        setBookmarks(updatedData);
-        chrome.runtime.sendMessage({
-            type: "removePointer",
-            updatedData: updatedData,
-        });
-    };
     const handleConformationPopup = (index) => {
-        setDeleteBookMarkNumber(index);
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
             if (tabs) {
                 chrome.tabs.sendMessage(tabs[0].id || 0, {
                     type: "removerConformationPopupActive",
-                    data: { positionIndex: index, bookMarkData: bookmarks }
+                    data: { positionIndex: index, bookMarkData: bookmarks },
                 });
             }
         });

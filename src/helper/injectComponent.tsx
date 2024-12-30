@@ -86,6 +86,13 @@ export const handleBookMarkPointerRemover = async () => {
   });
 };
 
+/**
+ * Renders a React component inside a div that is appended to the document body.
+ * The rendered component is a confirmation popup that asks the user to confirm
+ * the deletion of a bookmark.
+ * @returns {void}
+ */
+
 export const handlePopup = () => {
   const renderWrapper = document.createElement("div");
   renderWrapper.setAttribute(
@@ -116,6 +123,13 @@ export const handlePopup = () => {
   document.body.appendChild(renderWrapper);
 };
 
+/**
+ * Toggles the display of the popup for confirming removal of a bookmark.
+ *
+ * Given a string value of 'flex' or 'none', this function changes the display
+ * style of the popup to the given value. The popup is not removed from the DOM.
+ * @param {string} value - The display style value to set on the popup element.
+ */
 export const handleTogglePopup = (value: string) => {
   const element = document.querySelector('[class^="yt-bookmark"]');
   // Check if element is found and cast to HTMLElement

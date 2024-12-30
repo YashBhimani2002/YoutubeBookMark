@@ -28504,12 +28504,34 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+/**
+ * React component for a modal dialog that asks the user to confirm the deletion of a bookmark.
+ * The component renders a modal dialog with a prompt message and two buttons: "No, cancel" and
+ * "Yes, I'm sure". When the user clicks the "Yes, I'm sure" button, the component sends a message
+ * to the background script to delete the currently selected bookmark and then removes the
+ * corresponding bookmark pointer from the YouTube video player's progress bar. It also sends a
+ * message to the background script to reactivate the popup for confirmation, so that the user can
+ * confirm that the bookmark has been deleted.
+ *
+ * The component is connected to the Redux store using `useSelector` and gets the currently
+ * selected bookmark index and the bookmark data array from the Redux store.
+ */
 const RemoveConformation = () => {
     var _a;
     const { positionIndex, bookMarkData } = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)((state) => state.data);
+    /**
+     * Sends a message to the background script to cancel the deletion of the currently
+     * selected bookmark and to reactivate the popup for confirmation.
+     */
     const handleCancel = () => {
         chrome.runtime.sendMessage({ type: "activeRemoverConformationPopup" });
     };
+    /**
+     * Sends a message to the background script to delete the currently selected bookmark and then remove
+     * the corresponding bookmark pointer from the YouTube video player's progress bar.
+     * Also sends a message to the background script to reactivate the popup for confirmation, so that
+     * the user can confirm that the bookmark has been deleted.
+     */
     const handleDelete = () => {
         chrome.runtime.sendMessage({ type: "delete", number: positionIndex });
         const updatedData = bookMarkData.filter((_, i) => i !== positionIndex);
@@ -28669,6 +28691,12 @@ const handleBookMarkPointerRemover = () => __awaiter(void 0, void 0, void 0, fun
         });
     });
 });
+/**
+ * Renders a React component inside a div that is appended to the document body.
+ * The rendered component is a confirmation popup that asks the user to confirm
+ * the deletion of a bookmark.
+ * @returns {void}
+ */
 const handlePopup = () => {
     const renderWrapper = document.createElement("div");
     renderWrapper.setAttribute("style", `
@@ -28692,6 +28720,13 @@ const handlePopup = () => {
         react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_removeConformation__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
     document.body.appendChild(renderWrapper);
 };
+/**
+ * Toggles the display of the popup for confirming removal of a bookmark.
+ *
+ * Given a string value of 'flex' or 'none', this function changes the display
+ * style of the popup to the given value. The popup is not removed from the DOM.
+ * @param {string} value - The display style value to set on the popup element.
+ */
 const handleTogglePopup = (value) => {
     const element = document.querySelector('[class^="yt-bookmark"]');
     // Check if element is found and cast to HTMLElement
@@ -34725,18 +34760,6 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 
 
 
-/**
- * Scrapes the current YouTube video player data, including timestamp, video duration,
- * and seek bar position, and sends it to the background script.
- *
- * The function retrieves the minimum, maximum, current timestamp, and duration values
- * from the YouTube video player's progress bar. It also calculates the position of the
- * video on the seek bar and uses it to place a bookmark pointer on the progress bar.
- *
- * The scraped data is then sent to the background script using `chrome.runtime.sendMessage`.
- *
- * @returns {void}
- */
 /**
  * Scrapes the current YouTube video player data, including timestamp, video duration,
  * and seek bar position, and sends it to the background script.

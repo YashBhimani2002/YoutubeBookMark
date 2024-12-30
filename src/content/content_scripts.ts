@@ -14,18 +14,6 @@ import {
   multipleInjectPointer,
 } from "../helper/injectComponent";
 import { DataInterface } from "../helper/interfaceType";
-/**
- * Scrapes the current YouTube video player data, including timestamp, video duration,
- * and seek bar position, and sends it to the background script.
- *
- * The function retrieves the minimum, maximum, current timestamp, and duration values
- * from the YouTube video player's progress bar. It also calculates the position of the
- * video on the seek bar and uses it to place a bookmark pointer on the progress bar.
- *
- * The scraped data is then sent to the background script using `chrome.runtime.sendMessage`.
- *
- * @returns {void}
- */
 
 /**
  * Scrapes the current YouTube video player data, including timestamp, video duration,
