@@ -108,7 +108,6 @@ const handleStorePointerOnVideoLoad = () => {
  */
 const main = () => {
   const addElement = document.querySelector('[class^="video-ads"]');
-  console.log(addElement?.children?.length,"children length");
   
   if (addElement && addElement?.childNodes?.length > 0) {
     return 0;

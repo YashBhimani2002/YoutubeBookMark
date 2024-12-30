@@ -34877,10 +34877,9 @@ const handleStorePointerOnVideoLoad = () => {
  * If no such element is found, the element is appended to the end of the parent element.
  */
 const main = () => {
-    var _a, _b;
+    var _a;
     const addElement = document.querySelector('[class^="video-ads"]');
-    console.log((_a = addElement === null || addElement === void 0 ? void 0 : addElement.children) === null || _a === void 0 ? void 0 : _a.length, "children length");
-    if (addElement && ((_b = addElement === null || addElement === void 0 ? void 0 : addElement.childNodes) === null || _b === void 0 ? void 0 : _b.length) > 0) {
+    if (addElement && ((_a = addElement === null || addElement === void 0 ? void 0 : addElement.childNodes) === null || _a === void 0 ? void 0 : _a.length) > 0) {
         return 0;
     }
     else {
