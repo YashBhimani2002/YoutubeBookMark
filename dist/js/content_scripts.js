@@ -34877,24 +34877,38 @@ const handleStorePointerOnVideoLoad = () => {
  * If no such element is found, the element is appended to the end of the parent element.
  */
 const main = () => {
-    handleStorePointerOnVideoLoad();
-    (0,_helper_injectComponent__WEBPACK_IMPORTED_MODULE_4__.handlePopup)();
-    const entity = document.querySelector('[class^="ytp-right-controls"]');
-    if (entity) {
-        const image = document.createElement("img");
-        image.src = _helper_imageLink__WEBPACK_IMPORTED_MODULE_3__.youTubeIconLink;
-        Object.assign(image.style, _helper_contentStyle__WEBPACK_IMPORTED_MODULE_2__.bookMarkImageLogoStyle);
-        image.onclick = () => handleDataScraping();
-        const firstChilde = entity.firstChild;
-        if (firstChilde) {
-            entity.insertBefore(image, firstChilde);
-        }
-        else {
-            entity.appendChild(image);
+    var _a, _b;
+    const addElement = document.querySelector('[class^="video-ads"]');
+    console.log((_a = addElement === null || addElement === void 0 ? void 0 : addElement.children) === null || _a === void 0 ? void 0 : _a.length, "children length");
+    if (addElement && ((_b = addElement === null || addElement === void 0 ? void 0 : addElement.childNodes) === null || _b === void 0 ? void 0 : _b.length) > 0) {
+        return 0;
+    }
+    else {
+        handleStorePointerOnVideoLoad();
+        (0,_helper_injectComponent__WEBPACK_IMPORTED_MODULE_4__.handlePopup)();
+        const entity = document.querySelector('[class^="ytp-right-controls"]');
+        if (entity) {
+            const image = document.createElement("img");
+            image.src = _helper_imageLink__WEBPACK_IMPORTED_MODULE_3__.youTubeIconLink;
+            Object.assign(image.style, _helper_contentStyle__WEBPACK_IMPORTED_MODULE_2__.bookMarkImageLogoStyle);
+            image.onclick = () => handleDataScraping();
+            const firstChilde = entity.firstChild;
+            if (firstChilde) {
+                entity.insertBefore(image, firstChilde);
+            }
+            else {
+                entity.appendChild(image);
+            }
         }
     }
 };
-main();
+const addElement = document.querySelector('[class^="video-ads"]');
+if (addElement) {
+    new MutationObserver(main).observe(addElement, { childList: true });
+}
+else {
+    main();
+}
 
 })();
 

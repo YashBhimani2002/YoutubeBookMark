@@ -107,22 +107,34 @@ const handleStorePointerOnVideoLoad = () => {
  * If no such element is found, the element is appended to the end of the parent element.
  */
 const main = () => {
-  handleStorePointerOnVideoLoad();
-  handlePopup();
-  const entity = document.querySelector('[class^="ytp-right-controls"]');
-  if (entity) {
-    const image = document.createElement("img");
-    image.src = youTubeIconLink;
-    Object.assign(image.style, bookMarkImageLogoStyle);
-    image.onclick = () => handleDataScraping();
-    const firstChilde = entity.firstChild;
+  const addElement = document.querySelector('[class^="video-ads"]');
+  console.log(addElement?.children?.length,"children length");
+  
+  if (addElement && addElement?.childNodes?.length > 0) {
+    return 0;
+  } else {
+    handleStorePointerOnVideoLoad();
+    handlePopup();
+    const entity = document.querySelector('[class^="ytp-right-controls"]');
+    if (entity) {
+      const image = document.createElement("img");
+      image.src = youTubeIconLink;
+      Object.assign(image.style, bookMarkImageLogoStyle);
+      image.onclick = () => handleDataScraping();
+      const firstChilde = entity.firstChild;
 
-    if (firstChilde) {
-      entity.insertBefore(image, firstChilde);
-    } else {
-      entity.appendChild(image);
+      if (firstChilde) {
+        entity.insertBefore(image, firstChilde);
+      } else {
+        entity.appendChild(image);
+      }
     }
   }
 };
+const addElement = document.querySelector('[class^="video-ads"]');
+if (addElement) {
+    new MutationObserver(main).observe(addElement, { childList: true });
+} else {
+  main();
+}
 
-main();

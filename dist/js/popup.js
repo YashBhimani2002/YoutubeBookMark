@@ -28555,6 +28555,7 @@ const Popup = () => {
         chrome.storage.local.get("youtubeBookmarks", (result) => {
             console.log(result, "background");
             if (result) {
+                //let url = url.split("&t")[0];
                 setBookmarks(result.youtubeBookmarks);
             }
         });
