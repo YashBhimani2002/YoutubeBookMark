@@ -564,6 +564,9 @@ video {
 .relative {
   position: relative;
 }
+.inline-block {
+  display: inline-block;
+}
 .flex {
   display: flex;
 }
@@ -802,7 +805,7 @@ video {
     color: rgb(255 255 255 / var(--tw-text-opacity, 1));
   }
 }
-`, "",{"version":3,"sources":["webpack://./src/static/main.css"],"names":[],"mappings":"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","sourcesContent":["@tailwind base;\r\n@tailwind components;\r\n@tailwind utilities;\r\n\r\n.modal-container {\r\n  position: relative;\r\n  padding: 1rem;\r\n  width: 100%;\r\n  min-width: 31rem;\r\n  height: 100%;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n}\r\n\r\n.modal-content {\r\n  position: relative;\r\n  padding: 1rem;\r\n  text-align: center;\r\n  background-color: #ffffff;\r\n  border-radius: 0.5rem;\r\n  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  align-items: center;\r\n  width: 31rem;\r\n  height: 16rem;\r\n}\r\n\r\n.modal-content-text {\r\n  color: black;\r\n  margin-bottom: 1rem;\r\n  font-size: 20px;\r\n}\r\n\r\n.modal-content-button-container {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  gap: 2rem;\r\n}\r\n\r\n.modal-button {\r\n  padding-top: 0.5rem;\r\n  padding-bottom: 0.5rem;\r\n  padding-left: 0.75rem;\r\n  padding-right: 0.75rem;\r\n  font-size: large;\r\n  font-weight: 500;\r\n  border-radius: 0.5rem;\r\n  border: 1px solid #e5e7eb;\r\n}\r\n\r\n.btn-gray {\r\n  color: #6b7280;\r\n  background-color: #ffffff;\r\n}\r\n\r\n.btn-gray:hover {\r\n  background-color: #f3f4f6;\r\n}\r\n\r\n.btn-red {\r\n  background-color: #dc2626;\r\n  color: #ffffff;\r\n}\r\n\r\n.btn-red:hover {\r\n  background-color: #b91c1c;\r\n}\r\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/static/main.css"],"names":[],"mappings":"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","sourcesContent":["@tailwind base;\r\n@tailwind components;\r\n@tailwind utilities;\r\n\r\n.modal-container {\r\n  position: relative;\r\n  padding: 1rem;\r\n  width: 100%;\r\n  min-width: 31rem;\r\n  height: 100%;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n}\r\n\r\n.modal-content {\r\n  position: relative;\r\n  padding: 1rem;\r\n  text-align: center;\r\n  background-color: #ffffff;\r\n  border-radius: 0.5rem;\r\n  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  align-items: center;\r\n  width: 31rem;\r\n  height: 16rem;\r\n}\r\n\r\n.modal-content-text {\r\n  color: black;\r\n  margin-bottom: 1rem;\r\n  font-size: 20px;\r\n}\r\n\r\n.modal-content-button-container {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  gap: 2rem;\r\n}\r\n\r\n.modal-button {\r\n  padding-top: 0.5rem;\r\n  padding-bottom: 0.5rem;\r\n  padding-left: 0.75rem;\r\n  padding-right: 0.75rem;\r\n  font-size: large;\r\n  font-weight: 500;\r\n  border-radius: 0.5rem;\r\n  border: 1px solid #e5e7eb;\r\n}\r\n\r\n.btn-gray {\r\n  color: #6b7280;\r\n  background-color: #ffffff;\r\n}\r\n\r\n.btn-gray:hover {\r\n  background-color: #f3f4f6;\r\n}\r\n\r\n.btn-red {\r\n  background-color: #dc2626;\r\n  color: #ffffff;\r\n}\r\n\r\n.btn-red:hover {\r\n  background-color: #b91c1c;\r\n}\r\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -28558,6 +28561,53 @@ const RemoveConformation = () => {
 
 /***/ }),
 
+/***/ "./src/helper/contentStyle.tsx":
+/*!*************************************!*\
+  !*** ./src/helper/contentStyle.tsx ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   bookMarkDot: () => (/* binding */ bookMarkDot),
+/* harmony export */   bookMarkImageLogoStyle: () => (/* binding */ bookMarkImageLogoStyle),
+/* harmony export */   bookMarkRemovePopupContainer: () => (/* binding */ bookMarkRemovePopupContainer)
+/* harmony export */ });
+const bookMarkImageLogoStyle = {
+    display: "inline-block",
+    marginBottom: "4rem",
+    marginRight: "10px",
+    cursor: "pointer",
+    width: "20px",
+    height: "20px",
+};
+const bookMarkDot = {
+    position: "absolute",
+    top: "0px", // Align it to the top of the progress bar
+    width: "3px", // Dot size
+    height: "5px",
+    backgroundColor: "yellow",
+    zIndex: "99",
+};
+const bookMarkRemovePopupContainer = {
+    position: "fixed",
+    top: "0",
+    left: "0",
+    width: "100vw",
+    height: "100vh",
+    backgroundColor: "rgba(0, 0, 0, 0.8)",
+    color: "white",
+    display: "none",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: "999999",
+    fontSize: "24px",
+    pointerEvents: "all",
+};
+
+
+/***/ }),
+
 /***/ "./src/helper/imageLink.tsx":
 /*!**********************************!*\
   !*** ./src/helper/imageLink.tsx ***!
@@ -28601,8 +28651,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
 /* harmony import */ var _components_removeConformation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/removeConformation */ "./src/components/removeConformation.tsx");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/dist/react-redux.mjs");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/dist/react-redux.mjs");
 /* harmony import */ var _app_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../app/store */ "./src/app/store.ts");
+/* harmony import */ var _contentStyle__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./contentStyle */ "./src/helper/contentStyle.tsx");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -28612,6 +28663,7 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+
 
 
 
@@ -28635,13 +28687,8 @@ const handleBookMarkPointer = (position) => {
     let progressBarContainer = document.querySelector(".ytp-progress-bar-container");
     let dot = document.createElement("div");
     dot.className = "youtube-bookmark-dot";
-    dot.style.position = "absolute";
-    dot.style.top = "0px"; // Align it to the top of the progress bar
     dot.style.left = `${position}px`; // Place the dot at the correct position
-    dot.style.width = "3px"; // Dot size
-    dot.style.height = "5px";
-    dot.style.backgroundColor = "yellow";
-    dot.style.zIndex = "99"; // Ensure it's above the progress bar
+    Object.assign(dot.style, _contentStyle__WEBPACK_IMPORTED_MODULE_4__.bookMarkDot);
     // Append the dot to the progress bar container
     progressBarContainer.appendChild(dot);
 };
@@ -28699,24 +28746,10 @@ const handleBookMarkPointerRemover = () => __awaiter(void 0, void 0, void 0, fun
  */
 const handlePopup = () => {
     const renderWrapper = document.createElement("div");
-    renderWrapper.setAttribute("style", `
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0, 0, 0, 0.8);
-      color: white;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 999999;
-      font-size: 24px;
-      pointer-events: all;
-      `);
+    Object.assign(renderWrapper.style, _contentStyle__WEBPACK_IMPORTED_MODULE_4__.bookMarkRemovePopupContainer);
     renderWrapper.className = "yt-bookmark";
     const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(renderWrapper);
-    root.render(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_redux__WEBPACK_IMPORTED_MODULE_4__.Provider, { store: _app_store__WEBPACK_IMPORTED_MODULE_3__.store },
+    root.render(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_redux__WEBPACK_IMPORTED_MODULE_5__.Provider, { store: _app_store__WEBPACK_IMPORTED_MODULE_3__.store },
         react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_removeConformation__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
     document.body.appendChild(renderWrapper);
 };
@@ -34735,13 +34768,11 @@ var __webpack_exports__ = {};
   !*** ./src/content/content_scripts.ts ***!
   \****************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   handleStorePointerOnVideoLoad: () => (/* binding */ handleStorePointerOnVideoLoad)
-/* harmony export */ });
 /* harmony import */ var _app_features_DeleteData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app/features/DeleteData */ "./src/app/features/DeleteData.tsx");
 /* harmony import */ var _app_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../app/store */ "./src/app/store.ts");
-/* harmony import */ var _helper_imageLink__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../helper/imageLink */ "./src/helper/imageLink.tsx");
-/* harmony import */ var _helper_injectComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../helper/injectComponent */ "./src/helper/injectComponent.tsx");
+/* harmony import */ var _helper_contentStyle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../helper/contentStyle */ "./src/helper/contentStyle.tsx");
+/* harmony import */ var _helper_imageLink__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../helper/imageLink */ "./src/helper/imageLink.tsx");
+/* harmony import */ var _helper_injectComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../helper/injectComponent */ "./src/helper/injectComponent.tsx");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -34760,6 +34791,32 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 
 
 
+
+//created for listen updated book mark pointer
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => __awaiter(void 0, void 0, void 0, function* () {
+    if (message.type == "removerConformationPopupActive") {
+        _app_store__WEBPACK_IMPORTED_MODULE_1__.store.dispatch((0,_app_features_DeleteData__WEBPACK_IMPORTED_MODULE_0__.storeData)(message.data));
+        (0,_helper_injectComponent__WEBPACK_IMPORTED_MODULE_4__.handleTogglePopup)("flex");
+    }
+    else if (message.type == "removePointerContentScriptDisable") {
+        _app_store__WEBPACK_IMPORTED_MODULE_1__.store.dispatch((0,_app_features_DeleteData__WEBPACK_IMPORTED_MODULE_0__.storeData)({
+            positionIndex: -1,
+            bookMarkData: [],
+        }));
+        (0,_helper_injectComponent__WEBPACK_IMPORTED_MODULE_4__.handleTogglePopup)("none");
+    }
+    else if (message.type == "removePointerContentScript") {
+        yield (0,_helper_injectComponent__WEBPACK_IMPORTED_MODULE_4__.handleBookMarkPointerRemover)();
+        if (message.data.length > 0) {
+            (0,_helper_injectComponent__WEBPACK_IMPORTED_MODULE_4__.multipleInjectPointer)(message.data);
+        }
+        sendResponse({ message: "success" });
+    }
+    else if (message.type == "urlChanged") {
+        yield (0,_helper_injectComponent__WEBPACK_IMPORTED_MODULE_4__.handleBookMarkPointerRemover)();
+        handleStorePointerOnVideoLoad();
+    }
+}));
 /**
  * Scrapes the current YouTube video player data, including timestamp, video duration,
  * and seek bar position, and sends it to the background script.
@@ -34795,36 +34852,10 @@ const handleDataScraping = () => {
         let progressBarWidth = progressBarContainer.offsetWidth;
         let videoDuration = video.duration; // Get the video duration
         let position = (currentTime / videoDuration) * progressBarWidth;
-        (0,_helper_injectComponent__WEBPACK_IMPORTED_MODULE_3__.handleBookMarkPointer)(position);
+        (0,_helper_injectComponent__WEBPACK_IMPORTED_MODULE_4__.handleBookMarkPointer)(position);
         data.position = position.toString() || "";
     }
     chrome.runtime.sendMessage({ type: "scrapeData", data: data });
-};
-/**
- * Creates an image element with a YouTube bookmark icon and inserts it into the DOM right after the video controls.
- * The element is inserted as the first child of the element with a class name that starts with "ytp-right-controls".
- * If no such element is found, the element is appended to the end of the parent element.
- */
-const handleDocumentMutations = () => {
-    (0,_helper_injectComponent__WEBPACK_IMPORTED_MODULE_3__.handlePopup)();
-    const entity = document.querySelector('[class^="ytp-right-controls"]');
-    if (entity) {
-        const image = document.createElement("img");
-        image.src = _helper_imageLink__WEBPACK_IMPORTED_MODULE_2__.youTubeIconLink;
-        image.style.marginBottom = "15px";
-        image.style.marginRight = "10px";
-        image.style.cursor = "pointer";
-        image.style.width = "20px";
-        image.style.height = "20px";
-        image.onclick = () => handleDataScraping();
-        const firstChilde = entity.firstChild;
-        if (firstChilde) {
-            entity.insertBefore(image, firstChilde);
-        }
-        else {
-            entity.appendChild(image);
-        }
-    }
 };
 /**
  * Retrieves the youtubeBookmarks array from local Chrome storage and
@@ -34836,37 +34867,34 @@ const handleDocumentMutations = () => {
 const handleStorePointerOnVideoLoad = () => {
     chrome.storage.local.get("youtubeBookmarks", (result) => {
         if (result.youtubeBookmarks) {
-            (0,_helper_injectComponent__WEBPACK_IMPORTED_MODULE_3__.multipleInjectPointer)(result.youtubeBookmarks);
+            (0,_helper_injectComponent__WEBPACK_IMPORTED_MODULE_4__.multipleInjectPointer)(result.youtubeBookmarks);
         }
     });
 };
-handleStorePointerOnVideoLoad();
-handleDocumentMutations();
-//created for listen updated book mark pointer
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => __awaiter(void 0, void 0, void 0, function* () {
-    if (message.type == "removerConformationPopupActive") {
-        _app_store__WEBPACK_IMPORTED_MODULE_1__.store.dispatch((0,_app_features_DeleteData__WEBPACK_IMPORTED_MODULE_0__.storeData)(message.data));
-        (0,_helper_injectComponent__WEBPACK_IMPORTED_MODULE_3__.handleTogglePopup)("flex");
-    }
-    else if (message.type == "removePointerContentScriptDisable") {
-        _app_store__WEBPACK_IMPORTED_MODULE_1__.store.dispatch((0,_app_features_DeleteData__WEBPACK_IMPORTED_MODULE_0__.storeData)({
-            positionIndex: -1,
-            bookMarkData: [],
-        }));
-        (0,_helper_injectComponent__WEBPACK_IMPORTED_MODULE_3__.handleTogglePopup)("none");
-    }
-    else if (message.type == "removePointerContentScript") {
-        yield (0,_helper_injectComponent__WEBPACK_IMPORTED_MODULE_3__.handleBookMarkPointerRemover)();
-        if (message.data.length > 0) {
-            (0,_helper_injectComponent__WEBPACK_IMPORTED_MODULE_3__.multipleInjectPointer)(message.data);
+/**
+ * Creates an image element with a YouTube bookmark icon and inserts it into the DOM right after the video controls.
+ * The element is inserted as the first child of the element with a class name that starts with "ytp-right-controls".
+ * If no such element is found, the element is appended to the end of the parent element.
+ */
+const main = () => {
+    handleStorePointerOnVideoLoad();
+    (0,_helper_injectComponent__WEBPACK_IMPORTED_MODULE_4__.handlePopup)();
+    const entity = document.querySelector('[class^="ytp-right-controls"]');
+    if (entity) {
+        const image = document.createElement("img");
+        image.src = _helper_imageLink__WEBPACK_IMPORTED_MODULE_3__.youTubeIconLink;
+        Object.assign(image.style, _helper_contentStyle__WEBPACK_IMPORTED_MODULE_2__.bookMarkImageLogoStyle);
+        image.onclick = () => handleDataScraping();
+        const firstChilde = entity.firstChild;
+        if (firstChilde) {
+            entity.insertBefore(image, firstChilde);
         }
-        sendResponse({ message: "success" });
+        else {
+            entity.appendChild(image);
+        }
     }
-    else if (message.type == "urlChanged") {
-        yield (0,_helper_injectComponent__WEBPACK_IMPORTED_MODULE_3__.handleBookMarkPointerRemover)();
-        handleStorePointerOnVideoLoad();
-    }
-}));
+};
+main();
 
 })();
 

@@ -4,6 +4,7 @@ import { localStorageDataInterface } from "./interfaceType";
 import RemoveConformation from "../components/removeConformation";
 import { Provider } from "react-redux";
 import { store } from "../app/store";
+import { bookMarkDot, bookMarkRemovePopupContainer } from "./contentStyle";
 // import RemoveConformation from "../components/removeConformation";
 
 /**
@@ -25,14 +26,8 @@ export const handleBookMarkPointer = (position: number | GLfloat | string) => {
   );
   let dot = document.createElement("div");
   dot.className = "youtube-bookmark-dot";
-  dot.style.position = "absolute";
-  dot.style.top = "0px"; // Align it to the top of the progress bar
   dot.style.left = `${position}px`; // Place the dot at the correct position
-  dot.style.width = "3px"; // Dot size
-  dot.style.height = "5px";
-  dot.style.backgroundColor = "yellow";
-  dot.style.zIndex = "99"; // Ensure it's above the progress bar
-
+  Object.assign(dot.style, bookMarkDot);
   // Append the dot to the progress bar container
   progressBarContainer.appendChild(dot);
 };
@@ -95,24 +90,7 @@ export const handleBookMarkPointerRemover = async () => {
 
 export const handlePopup = () => {
   const renderWrapper = document.createElement("div");
-  renderWrapper.setAttribute(
-    "style",
-    `
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0, 0, 0, 0.8);
-      color: white;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 999999;
-      font-size: 24px;
-      pointer-events: all;
-      `
-  );
+  Object.assign(renderWrapper.style, bookMarkRemovePopupContainer);
   renderWrapper.className = "yt-bookmark";
   const root = createRoot(renderWrapper);
   root.render(

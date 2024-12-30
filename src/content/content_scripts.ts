@@ -5,6 +5,7 @@
  */
 import { storeData } from "../app/features/DeleteData";
 import { store } from "../app/store";
+import { bookMarkImageLogoStyle } from "../helper/contentStyle";
 import { youTubeIconLink } from "../helper/imageLink";
 import {
   handleBookMarkPointer,
@@ -15,6 +16,30 @@ import {
 } from "../helper/injectComponent";
 import { DataInterface } from "../helper/interfaceType";
 
+//created for listen updated book mark pointer
+chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+  if (message.type == "removerConformationPopupActive") {
+    store.dispatch(storeData(message.data));
+    handleTogglePopup("flex");
+  } else if (message.type == "removePointerContentScriptDisable") {
+    store.dispatch(
+      storeData({
+        positionIndex: -1,
+        bookMarkData: [],
+      })
+    );
+    handleTogglePopup("none");
+  } else if (message.type == "removePointerContentScript") {
+    await handleBookMarkPointerRemover();
+    if (message.data.length > 0) {
+      multipleInjectPointer(message.data);
+    }
+    sendResponse({ message: "success" });
+  } else if (message.type == "urlChanged") {
+    await handleBookMarkPointerRemover();
+    handleStorePointerOnVideoLoad();
+  }
+});
 /**
  * Scrapes the current YouTube video player data, including timestamp, video duration,
  * and seek bar position, and sends it to the background script.
@@ -62,23 +87,33 @@ const handleDataScraping = (): void => {
 
   chrome.runtime.sendMessage({ type: "scrapeData", data: data });
 };
-
+/**
+ * Retrieves the youtubeBookmarks array from local Chrome storage and
+ * injects bookmarks into the YouTube video player's progress bar.
+ * If the data is not present in local storage, no action is taken.
+ * This function is called when the popup is opened or when the user
+ * navigates to a new YouTube video.
+ */
+const handleStorePointerOnVideoLoad = () => {
+  chrome.storage.local.get("youtubeBookmarks", (result) => {
+    if (result.youtubeBookmarks) {
+      multipleInjectPointer(result.youtubeBookmarks);
+    }
+  });
+};
 /**
  * Creates an image element with a YouTube bookmark icon and inserts it into the DOM right after the video controls.
  * The element is inserted as the first child of the element with a class name that starts with "ytp-right-controls".
  * If no such element is found, the element is appended to the end of the parent element.
  */
-const handleDocumentMutations = () => {
+const main = () => {
+  handleStorePointerOnVideoLoad();
   handlePopup();
   const entity = document.querySelector('[class^="ytp-right-controls"]');
   if (entity) {
     const image = document.createElement("img");
     image.src = youTubeIconLink;
-    image.style.marginBottom = "15px";
-    image.style.marginRight = "10px";
-    image.style.cursor = "pointer";
-    image.style.width = "20px";
-    image.style.height = "20px";
+    Object.assign(image.style, bookMarkImageLogoStyle);
     image.onclick = () => handleDataScraping();
     const firstChilde = entity.firstChild;
 
@@ -90,45 +125,4 @@ const handleDocumentMutations = () => {
   }
 };
 
-/**
- * Retrieves the youtubeBookmarks array from local Chrome storage and
- * injects bookmarks into the YouTube video player's progress bar.
- * If the data is not present in local storage, no action is taken.
- * This function is called when the popup is opened or when the user
- * navigates to a new YouTube video.
- */
-export const handleStorePointerOnVideoLoad = () => {
-  chrome.storage.local.get("youtubeBookmarks", (result) => {
-    if (result.youtubeBookmarks) {
-      multipleInjectPointer(result.youtubeBookmarks);
-    }
-  });
-};
-
-handleStorePointerOnVideoLoad();
-handleDocumentMutations();
-
-//created for listen updated book mark pointer
-chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
-  if (message.type == "removerConformationPopupActive") {
-    store.dispatch(storeData(message.data));
-    handleTogglePopup("flex");
-  } else if (message.type == "removePointerContentScriptDisable") {
-    store.dispatch(
-      storeData({
-        positionIndex: -1,
-        bookMarkData: [],
-      })
-    );
-    handleTogglePopup("none");
-  } else if (message.type == "removePointerContentScript") {
-    await handleBookMarkPointerRemover();
-    if (message.data.length > 0) {
-      multipleInjectPointer(message.data);
-    }
-    sendResponse({ message: "success" });
-  } else if (message.type == "urlChanged") {
-    await handleBookMarkPointerRemover();
-    handleStorePointerOnVideoLoad();
-  }
-});
+main();

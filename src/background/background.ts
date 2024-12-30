@@ -1,12 +1,8 @@
-import { handleBookMarkPointer } from "../helper/injectComponent";
 import {
   DataInterface,
   localStorageDataInterface,
 } from "../helper/interfaceType";
 
-chrome.runtime.onInstalled.addListener(() => {
-  console.log("Extension installed");
-});
 
 // created for return current tab url
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -67,7 +63,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       }
     });
   } else if (message.type == "removePointer") {
-    // chrome.runtime.sendMessage({ type: "removePointerContentScript" });
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       if (tabs) {
         chrome.tabs.sendMessage(tabs[0].id || 0, {

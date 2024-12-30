@@ -21,9 +21,6 @@ var __webpack_exports__ = {};
   !*** ./src/background/background.ts ***!
   \**************************************/
 __webpack_require__.r(__webpack_exports__);
-chrome.runtime.onInstalled.addListener(() => {
-    console.log("Extension installed");
-});
 // created for return current tab url
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === "getCurrentTabUrl") {
@@ -83,7 +80,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         });
     }
     else if (message.type == "removePointer") {
-        // chrome.runtime.sendMessage({ type: "removePointerContentScript" });
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
             if (tabs) {
                 chrome.tabs.sendMessage(tabs[0].id || 0, {
